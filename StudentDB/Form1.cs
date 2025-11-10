@@ -17,14 +17,14 @@ namespace StudentDB
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            using var connection = DBHelper.dbGetConnection();
-            connection.Open();
+            using var connection = DBHelper.dbGetConnection();// opening
+            connection.Open();                                // "port"
 
-            string query = "INSERT INTO students (name, age) VALUES (@name, @age)";
+            string query = "INSERT INTO students (name, age) VALUES (@name, @age)"; // запит на вставлення нового чєліка
 
-            using var command = new SQLiteCommand(query, connection);
-            command.Parameters.AddWithValue("@name", txtName.Text);
-            command.Parameters.AddWithValue("@age", (int)nudAge.Value);
+            using var command = new SQLiteCommand(query, connection); //creating command
+            command.Parameters.AddWithValue("@name", txtName.Text); //SQLite collum name filled query with string from text box
+            command.Parameters.AddWithValue("@age", (int)nudAge.Value); //SQLite collum age filled query with int from Numeric up or down
 
             command.ExecuteNonQuery();
 
@@ -39,8 +39,8 @@ namespace StudentDB
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            using var connection = DBHelper.dbGetConnection();
-            connection.Open();
+            using var connection = DBHelper.dbGetConnection();  // opening
+            connection.Open();                                  // "port"
 
             string query = "SELECT * FROM students";
             using var adapter = new SQLiteDataAdapter(query, connection);
